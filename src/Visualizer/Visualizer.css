@@ -1,20 +1,22 @@
 .sorting-parameters {
   position: fixed;
-  bottom: 0;
+  top: 0;
   width: 100%;
   display: flex;
-  background-color: #100406;
+  background-color: #333333;
   height: 50px;
 }
 
 .array-bar {
-  width: 2px;
+  width: 15px;
   display: inline-block;
   margin: 0 1px;
+  background-color: #C9B79C;
 }
 
-.bars {
-  position: absolute;
-  left: 100px;
-  /* top: 100px; */
+.bar-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-top: 20%;
 }

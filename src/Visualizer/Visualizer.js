@@ -1,54 +1,59 @@
-import "./Visualizer.css";
-import React from "react";
+import './Visualizer.css';
+import SettingBar from './Components/SettingBar/SettingBar.js';
 
-export default class Visualizer extends React.Component {
-  constructor(props) {
-    super(props);
+import bubbleSort from './SortingAlgorithms/bubbleSort.js';
 
-    this.state = {
-      array: [],
-    };
-  }
+import randomizeArray from './HelperFiles/randomizeArray';
+import React, { useState } from 'react';
 
-  componentDidMount() {
-    this.resetArray();
-  }
+const Visualizer = () => {
+  const defaultArraySize = 100;
 
-  resetArray() {
-    const array = [];
-    for (let i = 0; i < 10; ++i) {
-      array.push(Math.random() * 200);
+  const [randomArray, setRandomArray] = useState(
+    randomizeArray(defaultArraySize)
+  );
+
+  const [isRunning, setRunning] = useState(false);
+
+  const generateArray = () => {
+    const array = randomizeArray(randomArray.length);
+    setRandomArray(array);
+  };
+
+  const changeArraySize = (value) => {
+    if (!isRunning) {
+      const arrayChange = randomizeArray(value);
+      setRandomArray(arrayChange);
     }
-    this.setState({ array });
-  }
+  };
 
-  render() {
-    const { array } = this.state;
-    return (
-      <div className="container">
-        <div className="bars">
-          {array.map((value, idx) => (
-            <div
-              className="array-bar"
-              key={idx}
-              style={{
-                backgroundColor: "#C9B79C",
-                height: `${value}px`,
-              }}
-            ></div>
-          ))}
-        </div>
-        <div className="sorting-parameters">
-          <button
-            onClick={() => {
-              this.resetArray();
+  const startSort = async () => {
+    setRunning(true);
+    await bubbleSort({ randomArray, setRandomArray });
+    setRunning(false);
+  };
+
+  return (
+    <>
+      <SettingBar
+        isRunning={isRunning}
+        randomizeClicked={generateArray}
+        startBubbleSort={startSort}
+        changeArraySize={changeArraySize}
+      ></SettingBar>
+      <div className="bar-container">
+        {randomArray.map((value, idx) => (
+          <div
+            className="array-bar"
+            key={idx}
+            style={{
+              height: `${value}px`,
             }}
-          >
-            Generate New Array
-          </button>
-          <button>asdf</button>
-        </div>
+          ></div>
+        ))}
       </div>
-    );
-  }
-}
+    </>
+  );
+};
+
+export default Visualizer;
