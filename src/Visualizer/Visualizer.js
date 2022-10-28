@@ -86,6 +86,7 @@ const Visualizer = () => {
             style={{
               height: `${value}px`,
               backgroundColor: '#C9B79C',
+              width: `${100 / randomArray.length}%`,
             }}
           ></div>
         ))}

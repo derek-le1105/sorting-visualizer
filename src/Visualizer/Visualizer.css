@@ -8,7 +8,6 @@
 }
 
 .array-bar {
-  width: 15px;
   margin: 0 1px;
   background-color: #C9B79C;
 }
@@ -19,4 +18,5 @@
   justify-content: center;
   align-items: flex-end;
   height: 90vh;
+  padding: 0 20px 0;
 }
