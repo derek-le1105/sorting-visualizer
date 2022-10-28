@@ -14,11 +14,10 @@ const Visualizer = () => {
     randomizeArray(defaultArraySize)
   );
 
-  const [sortSpeed, setSortSpeed] = useState(5);
-  const [algorithm, setAlgorithm] = useState('None');
+  const [sortSpeed, setSortSpeed] = useState(50);
+  const [algorithm, setAlgorithm] = useState('Algorithm');
 
   const [isRunning, setRunning] = useState(false);
-  const [pausePressed, setPausePressed] = useState(false);
 
   const generateArray = () => {
     const array = randomizeArray(randomArray.length);
@@ -62,21 +61,16 @@ const Visualizer = () => {
     setRunning(false);
   };
 
-  const pauseSort = () => {
-    console.log(algorithm);
-    setPausePressed(!pausePressed);
-  };
-
   return (
     <>
       <SettingBar
         isRunning={isRunning}
         randomizeClicked={generateArray}
+        algorithm={algorithm}
         setAlgorithm={setAlgorithm}
         startSort={startSort}
         changeArraySize={changeArraySize}
         changeSortSpeed={changeSortSpeed}
-        pauseSort={pauseSort}
       ></SettingBar>
       <div className="bar-container">
         {randomArray.map((value, idx) => (

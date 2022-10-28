@@ -3,50 +3,45 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
 import './SettingBar.css';
 import AlgorithmDropDown from '../AlgorithmDropDown/AlgorithmDropDown';
+import Slider from './Slider';
 
 const SettingBar = ({
   isRunning,
   randomizeClicked,
+  algorithm,
   setAlgorithm,
   startSort,
   changeArraySize,
   changeSortSpeed,
-  pauseSort,
 }) => {
-  const [playPressed, setPlayPressed] = useState(false);
-
-  const changeSize = (e) => {
-    changeArraySize(parseInt(e.target.value));
-  };
-
-  const changeSpeed = (e) => {
-    changeSortSpeed(parseInt(e.target.value));
-  };
-
   return (
     <>
       <div className="setting-bar">
         <button onClick={randomizeClicked}>Randomize Array</button>
-        <input
-          disabled={isRunning}
-          type="range"
-          id="sizeSlider"
-          onChange={changeSize}
+        <Slider
+          isRunning={isRunning}
+          text={'Array Size'}
+          id={'sizeSlider'}
+          onSlide={changeArraySize}
           min={5}
           max={200}
-        ></input>
-        <AlgorithmDropDown setAlgorithm={setAlgorithm}></AlgorithmDropDown>
-        <input
-          disabled={isRunning}
-          type="range"
-          id="speedSlider"
-          onChange={changeSpeed}
-          min={5}
-          max={5000}
-        ></input>
+          defaultValue={100}
+        ></Slider>
+        <AlgorithmDropDown
+          algorithm={algorithm}
+          setAlgorithm={setAlgorithm}
+        ></AlgorithmDropDown>
+        <Slider
+          isRunning={isRunning}
+          text={'Sort Speed'}
+          id={'speedSlider'}
+          onSlide={changeSortSpeed}
+          min={0}
+          max={100}
+          defaultValue={50}
+        ></Slider>
 
         <button onClick={startSort}>Start</button>
-        <button onClick={pauseSort}>Pause</button>
       </div>
     </>
   );
