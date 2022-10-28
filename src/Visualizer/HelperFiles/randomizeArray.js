@@ -1,9 +1,11 @@
 const randomizeArray = (arraySize) => {
-  let array = []
+  let array = [];
 
-  for (let i = 0; i < arraySize; ++i)
-    array.push(Math.floor(Math.random() * 500))
-  return array
-}
+  for (let i = 0; i < arraySize; ++i) {
+    array.push(Math.floor(Math.random() * 500) + 10);
+  }
 
-export default randomizeArray
+  return array;
+};
+
+export default randomizeArray;

@@ -2,6 +2,7 @@ import './Visualizer.css';
 import SettingBar from './Components/SettingBar/SettingBar.js';
 
 import bubbleSort from './SortingAlgorithms/bubbleSort.js';
+import mergeSort from './SortingAlgorithms/mergeSort';
 
 import randomizeArray from './HelperFiles/randomizeArray';
 import React, { useState } from 'react';
@@ -13,10 +14,19 @@ const Visualizer = () => {
     randomizeArray(defaultArraySize)
   );
 
+  const [sortSpeed, setSortSpeed] = useState(5);
+  const [algorithm, setAlgorithm] = useState('None');
+
   const [isRunning, setRunning] = useState(false);
+  const [pausePressed, setPausePressed] = useState(false);
 
   const generateArray = () => {
     const array = randomizeArray(randomArray.length);
+    for (let i = 0; i < array.length; i++) {
+      let bar = document.getElementById(`bar-${i}`);
+      bar.style.backgroundColor = '#C9B79C';
+    }
+
     setRandomArray(array);
   };
 
@@ -27,10 +37,34 @@ const Visualizer = () => {
     }
   };
 
+  const changeSortSpeed = (value) => {
+    setSortSpeed(value);
+  };
+
   const startSort = async () => {
+    if (isRunning) return;
     setRunning(true);
-    await bubbleSort({ randomArray, setRandomArray });
+    switch (algorithm) {
+      case 'None':
+        alert('Please select a sorting algorithm in the dropdown below');
+        break;
+      case 'Bubble Sort':
+        await bubbleSort({ randomArray, setRandomArray, sortSpeed });
+        break;
+
+      case 'Merge Sort':
+        await mergeSort({ randomArray, setRandomArray, sortSpeed });
+        break;
+      default:
+        break;
+    }
+
     setRunning(false);
+  };
+
+  const pauseSort = () => {
+    console.log(algorithm);
+    setPausePressed(!pausePressed);
   };
 
   return (
@@ -38,16 +72,21 @@ const Visualizer = () => {
       <SettingBar
         isRunning={isRunning}
         randomizeClicked={generateArray}
-        startBubbleSort={startSort}
+        setAlgorithm={setAlgorithm}
+        startSort={startSort}
         changeArraySize={changeArraySize}
+        changeSortSpeed={changeSortSpeed}
+        pauseSort={pauseSort}
       ></SettingBar>
       <div className="bar-container">
         {randomArray.map((value, idx) => (
           <div
             className="array-bar"
             key={idx}
+            id={`bar-${idx}`}
             style={{
               height: `${value}px`,
+              backgroundColor: '#C9B79C',
             }}
           ></div>
         ))}
