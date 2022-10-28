@@ -4,6 +4,7 @@ import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
 import './SettingBar.css';
 import AlgorithmDropDown from '../AlgorithmDropDown/AlgorithmDropDown';
 import Slider from './Slider';
+import Button from './Button';
 
 const SettingBar = ({
   isRunning,
@@ -17,7 +18,7 @@ const SettingBar = ({
   return (
     <>
       <div className="setting-bar">
-        <button onClick={randomizeClicked}>Randomize Array</button>
+        <Button task={randomizeClicked} title="Randomize Array"></Button>
         <Slider
           isRunning={isRunning}
           text={'Array Size'}
@@ -26,7 +27,7 @@ const SettingBar = ({
           min={5}
           max={200}
           defaultValue={100}
-        ></Slider>
+        />
         <AlgorithmDropDown
           algorithm={algorithm}
           setAlgorithm={setAlgorithm}
@@ -37,11 +38,11 @@ const SettingBar = ({
           id={'speedSlider'}
           onSlide={changeSortSpeed}
           min={0}
-          max={100}
+          max={5000}
           defaultValue={50}
-        ></Slider>
+        />
 
-        <button onClick={startSort}>Start</button>
+        <Button task={startSort} title="Start"></Button>
       </div>
     </>
   );

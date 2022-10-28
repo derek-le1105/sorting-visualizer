@@ -16,7 +16,7 @@ const Visualizer = () => {
 
   const [sortSpeed, setSortSpeed] = useState(50);
   const [algorithm, setAlgorithm] = useState('Algorithm');
-
+  const [arrayComparisons, setArrayComparisons] = useState(0);
   const [isRunning, setRunning] = useState(false);
 
   const generateArray = () => {
@@ -44,11 +44,16 @@ const Visualizer = () => {
     if (isRunning) return;
     setRunning(true);
     switch (algorithm) {
-      case 'None':
+      case 'Algorithm':
         alert('Please select a sorting algorithm in the dropdown below');
         break;
       case 'Bubble Sort':
-        await bubbleSort({ randomArray, setRandomArray, sortSpeed });
+        await bubbleSort({
+          randomArray,
+          setRandomArray,
+          sortSpeed,
+          setArrayComparisons,
+        });
         break;
 
       case 'Merge Sort':

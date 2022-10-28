@@ -1,12 +1,15 @@
 import { useState } from 'react';
+import ElementMaker from './ElementMaker';
 
 const Slider = (props) => {
   const [size, setSize] = useState(props.defaultValue);
+  const [changeInput, setChangeInput] = useState(false);
 
   const changeSize = (e) => {
-    setSize(e.target.value);
+    if (e.target.value > props.max) setSize(props.max);
+    else setSize(e.target.value);
     props.onSlide(parseInt(e.target.value));
-    document.getElementById(props.id).innerHTML = this.value;
+    //document.getElementById(props.id).innerHTML = this.value;
   };
 
   return (
@@ -28,7 +31,18 @@ const Slider = (props) => {
         defaultValue={props.defaultValue}
         value={size}
       ></input>
-      <label style={{ color: 'white' }}>{size}</label>
+      <span>
+        <ElementMaker
+          value={size}
+          handleChange={changeSize}
+          handleDoubleClick={() => setChangeInput(true)}
+          handleBlur={() => setChangeInput(false)}
+          changeInput={changeInput}
+        ></ElementMaker>
+      </span>
+      {
+        //<label style={{ color: 'white' }}>{size}</label>
+      }
     </div>
   );
 };

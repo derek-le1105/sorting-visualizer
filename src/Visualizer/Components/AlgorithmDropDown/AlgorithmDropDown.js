@@ -11,7 +11,7 @@ const AlgorithmDropDown = ({ algorithm, setAlgorithm }) => {
   };
 
   return (
-    <div className="dropdown">
+    <div className="dropdown" style={{ margin: '15px' }}>
       <button
         onClick={handleMenuOpen}
         style={{ height: `100%`, padding: `0px 20px` }}
