@@ -51,6 +51,16 @@ const AlgorithmDropDown = ({ algorithm, setAlgorithm }) => {
               Merge Sort
             </button>
           </li>
+          <li className="menu-item">
+            <button
+              onClick={() => {
+                setAlgorithm('Selection Sort');
+                setMenuOpen(false);
+              }}
+            >
+              Selection Sort
+            </button>
+          </li>
         </ul>
       )}
     </div>

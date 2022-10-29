@@ -3,6 +3,7 @@ import SettingBar from './Components/SettingBar/SettingBar.js';
 
 import bubbleSort from './SortingAlgorithms/bubbleSort.js';
 import mergeSort from './SortingAlgorithms/mergeSort';
+import selectionSort from './SortingAlgorithms/selectionSort';
 
 import randomizeArray from './HelperFiles/randomizeArray';
 import React, { useState } from 'react';
@@ -58,6 +59,10 @@ const Visualizer = () => {
 
       case 'Merge Sort':
         await mergeSort({ randomArray, setRandomArray, sortSpeed });
+        break;
+
+      case 'Selection Sort':
+        await selectionSort({ randomArray, setRandomArray, sortSpeed });
         break;
       default:
         break;

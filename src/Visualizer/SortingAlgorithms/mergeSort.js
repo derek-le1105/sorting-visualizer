@@ -7,6 +7,8 @@ const correctColor = `#899886`;
 
 let arrayCopy = [];
 
+//TODO: Set up color coding
+
 const mergeSort = async ({ randomArray, setRandomArray, sortSpeed }) => {
   let leftIdx = 0,
     rightIdx = randomArray.length;
