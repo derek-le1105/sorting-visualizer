@@ -2,7 +2,7 @@ import asyncTimeout from '../HelperFiles/asyncTimeout';
 
 const prevColor = '#C9B79C';
 const compareColor = '#574638';
-const compareColor2 = 'red';
+const compareColor2 = '#B42D43';
 const correctColor = `#899886`;
 
 const bubbleSort = async ({ randomArray, setRandomArray, sortSpeed }) => {
@@ -11,11 +11,15 @@ const bubbleSort = async ({ randomArray, setRandomArray, sortSpeed }) => {
     for (let j = 0; j < randomArray.length - i - 1; j++) {
       let bar1 = document.getElementById(`bar-${j}`);
       let bar2 = document.getElementById(`bar-${j + 1}`);
-      await asyncTimeout({ timeout: sortSpeed / 2 });
+
+      await asyncTimeout({ timeout: sortSpeed });
+
       prevBar.style.background = prevColor;
       bar1.style.backgroundColor = compareColor;
       bar2.style.backgroundColor = compareColor2;
-      await asyncTimeout({ timeout: sortSpeed / 2 });
+
+      await asyncTimeout({ timeout: sortSpeed });
+
       if (randomArray[j + 1] < randomArray[j]) {
         //leftBar > rightBar
         let temp = randomArray[j];

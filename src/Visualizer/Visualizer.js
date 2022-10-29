@@ -85,8 +85,8 @@ const Visualizer = () => {
             id={`bar-${idx}`}
             style={{
               height: `${value}px`,
-              backgroundColor: '#C9B79C',
               width: `${100 / randomArray.length}%`,
+              backgroundColor: '#C9B79C',
             }}
           ></div>
         ))}
