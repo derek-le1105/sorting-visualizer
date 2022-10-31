@@ -1,7 +1,14 @@
 const Button = (props) => {
+  const taskClick = () => {
+    props.task();
+    if (props.setArrayComparisons) {
+      props.setArrayComparisons(0);
+    }
+  };
+
   return (
     <>
-      <button onClick={props.task} style={{ margin: '15px' }}>
+      <button onClick={taskClick} style={{ margin: '15px' }}>
         {props.title}
       </button>
     </>

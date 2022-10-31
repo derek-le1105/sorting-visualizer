@@ -6,10 +6,14 @@ const wrongColor = '#B42D43';
 const correctColor = `#899886`;
 
 let arrayCopy = [];
-
 //TODO: Set up color coding
 
-const mergeSort = async ({ randomArray, setRandomArray, sortSpeed }) => {
+const mergeSort = async ({
+  randomArray,
+  setRandomArray,
+  sortSpeed,
+  setArrayComparisons,
+}) => {
   let leftIdx = 0,
     rightIdx = randomArray.length;
   arrayCopy = randomArray.slice();
@@ -54,7 +58,6 @@ const mergeArray = async (
     bar2 = document.getElementById(`bar-${middle + j}`);
 
     changeColor(bar1, bar2, compareColor);*/
-
     await asyncTimeout({ timeout: sortSpeed / 4 });
 
     if (leftArr[i] <= rightArr[j]) {

@@ -14,11 +14,16 @@ const SettingBar = ({
   startSort,
   changeArraySize,
   changeSortSpeed,
+  setArrayComparisons,
 }) => {
   return (
     <>
       <div className="setting-bar">
-        <Button task={randomizeClicked} title="Randomize Array"></Button>
+        <Button
+          task={randomizeClicked}
+          setArrayComparisons={setArrayComparisons}
+          title="Randomize Array"
+        ></Button>
         <Slider
           isRunning={isRunning}
           text={'Array Size'}
@@ -42,7 +47,11 @@ const SettingBar = ({
           defaultValue={50}
         />
 
-        <Button task={startSort} title="Start"></Button>
+        <Button
+          task={startSort}
+          setArrayComparisons={setArrayComparisons}
+          title="Start"
+        ></Button>
       </div>
     </>
   );

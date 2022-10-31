@@ -1,11 +1,17 @@
 import asyncTimeout from '../HelperFiles/asyncTimeout';
 const prevColor = '#C9B79C';
 const compareColor = '#574638';
-const compareColor2 = '#B42D43';
+const iteratingColor = '#B42D43';
 const correctColor = `#899886`;
 const swappingColor = `#CF963A`;
 
-const selectionSort = async ({ randomArray, setRandomArray, sortSpeed }) => {
+const selectionSort = async ({
+  randomArray,
+  setRandomArray,
+  sortSpeed,
+  setArrayComparisons,
+}) => {
+  let comparisons = 0;
   for (let i = 0; i < randomArray.length; i++) {
     let minIdx = i;
     let pivotBar, iteratingBar, swapBar;
@@ -17,9 +23,10 @@ const selectionSort = async ({ randomArray, setRandomArray, sortSpeed }) => {
 
     for (let j = i + 1; j < randomArray.length; j++) {
       iteratingBar = document.getElementById(`bar-${j}`);
-      iteratingBar.style.backgroundColor = compareColor2;
+      iteratingBar.style.backgroundColor = iteratingColor;
       await asyncTimeout({ timeout: sortSpeed / 5 });
       //if we find an element that is lesser than pivot, make our minIdx(pivot) become that element
+      setArrayComparisons(++comparisons);
       if (randomArray[minIdx] > randomArray[j]) {
         if (swapBar) swapBar.style.backgroundColor = prevColor;
         swapBar = document.getElementById(`bar-${j}`);
@@ -29,9 +36,7 @@ const selectionSort = async ({ randomArray, setRandomArray, sortSpeed }) => {
       }
 
       await asyncTimeout({ timeout: sortSpeed / 5 });
-      if (!newMinFound) {
-        iteratingBar.style.backgroundColor = prevColor;
-      }
+      if (!newMinFound) iteratingBar.style.backgroundColor = prevColor;
       newMinFound = false;
     }
     await asyncTimeout({ timeout: sortSpeed / 5 });

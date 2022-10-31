@@ -4,6 +4,7 @@ import SettingBar from './Components/SettingBar/SettingBar.js';
 import bubbleSort from './SortingAlgorithms/bubbleSort.js';
 import mergeSort from './SortingAlgorithms/mergeSort';
 import selectionSort from './SortingAlgorithms/selectionSort';
+import quickSort from './SortingAlgorithms/quickSort';
 
 import randomizeArray from './HelperFiles/randomizeArray';
 import React, { useState } from 'react';
@@ -58,11 +59,29 @@ const Visualizer = () => {
         break;
 
       case 'Merge Sort':
-        await mergeSort({ randomArray, setRandomArray, sortSpeed });
+        await mergeSort({
+          randomArray,
+          setRandomArray,
+          sortSpeed,
+          setArrayComparisons,
+        });
         break;
 
       case 'Selection Sort':
-        await selectionSort({ randomArray, setRandomArray, sortSpeed });
+        await selectionSort({
+          randomArray,
+          setRandomArray,
+          sortSpeed,
+          setArrayComparisons,
+        });
+        break;
+      case 'Quick Sort':
+        await quickSort({
+          randomArray,
+          setRandomArray,
+          sortSpeed,
+          setArrayComparisons,
+        });
         break;
       default:
         break;
@@ -73,6 +92,9 @@ const Visualizer = () => {
 
   return (
     <>
+      <div className="sorting-information">
+        <span>Array Comparisons: {arrayComparisons}</span>
+      </div>
       <SettingBar
         isRunning={isRunning}
         randomizeClicked={generateArray}
@@ -81,6 +103,7 @@ const Visualizer = () => {
         startSort={startSort}
         changeArraySize={changeArraySize}
         changeSortSpeed={changeSortSpeed}
+        setArrayComparisons={setArrayComparisons}
       ></SettingBar>
       <div className="bar-container">
         {randomArray.map((value, idx) => (

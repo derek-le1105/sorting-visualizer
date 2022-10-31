@@ -61,6 +61,16 @@ const AlgorithmDropDown = ({ algorithm, setAlgorithm }) => {
               Selection Sort
             </button>
           </li>
+          <li className="menu-item">
+            <button
+              onClick={() => {
+                setAlgorithm('Quick Sort');
+                setMenuOpen(false);
+              }}
+            >
+              Quick Sort
+            </button>
+          </li>
         </ul>
       )}
     </div>
