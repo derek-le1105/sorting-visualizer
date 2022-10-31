@@ -5,6 +5,7 @@ import bubbleSort from './SortingAlgorithms/bubbleSort.js';
 import mergeSort from './SortingAlgorithms/mergeSort';
 import selectionSort from './SortingAlgorithms/selectionSort';
 import quickSort from './SortingAlgorithms/quickSort';
+import bogoSort from './SortingAlgorithms/bogoSort';
 
 import randomizeArray from './HelperFunctions/randomizeArray';
 import React, { useState } from 'react';
@@ -85,6 +86,14 @@ const Visualizer = () => {
             setArrayComparisons,
           });
           break;
+        case 'Bogo Sort':
+          await bogoSort({
+            randomArray,
+            setRandomArray,
+            sortSpeed,
+            setArrayComparisons,
+          });
+          break;
         default:
           break;
       }
@@ -107,7 +116,7 @@ const Visualizer = () => {
         changeSortSpeed={changeSortSpeed}
         setArrayComparisons={setArrayComparisons}
       ></SettingBar>
-      <div className="bar-container">
+      <div className="bar-container" id="container">
         {randomArray.map((value, idx) => (
           <div
             className="array-bar"

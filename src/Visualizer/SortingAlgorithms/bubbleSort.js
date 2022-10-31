@@ -1,4 +1,5 @@
 import asyncTimeout from '../HelperFunctions/asyncTimeout';
+import checkArray from '../HelperFunctions/checkArray';
 
 const prevColor = '#C9B79C';
 const compareColor = '#574638';
@@ -39,7 +40,8 @@ const bubbleSort = async ({
     let correctBar = document.getElementById(
       `bar-${randomArray.length - i - 1}`
     );
-    correctBar.style.backgroundColor = correctColor;
+    correctBar.style.backgroundColor = prevColor;
+    await checkArray(randomArray);
   }
 };
 
