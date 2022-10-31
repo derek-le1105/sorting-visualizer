@@ -1,4 +1,4 @@
-import asyncTimeout from '../HelperFiles/asyncTimeout';
+import asyncTimeout from '../HelperFunctions/asyncTimeout';
 const prevColor = '#C9B79C';
 const compareColor = '#574638';
 const iteratingColor = '#B42D43';
