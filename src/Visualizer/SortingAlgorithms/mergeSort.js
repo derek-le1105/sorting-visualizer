@@ -6,6 +6,8 @@ const compareColor = '#574638';
 const iterColor = '#B42D43';
 
 let arrayCopy = [];
+let comparisons = 0,
+  accesses = 0;
 //TODO: Set up color coding
 
 const mergeSort = async ({
@@ -18,18 +20,56 @@ const mergeSort = async ({
   let leftIdx = 0,
     rightIdx = randomArray.length;
   arrayCopy = randomArray.slice();
-  await splitArray(leftIdx, rightIdx, setRandomArray, sortSpeed);
+  await splitArray(
+    leftIdx,
+    rightIdx,
+    setRandomArray,
+    sortSpeed,
+    setArrayComparisons,
+    setArrayAccesses
+  );
   await checkArray(arrayCopy);
+  comparisons = 0;
+  accesses = 0;
 };
 
-const splitArray = async (leftIdx, rightIdx, setRandomArray, sortSpeed) => {
+const splitArray = async (
+  leftIdx,
+  rightIdx,
+  setRandomArray,
+  sortSpeed,
+  setArrayComparisons,
+  setArrayAccesses
+) => {
   if (rightIdx - leftIdx <= 1) return;
 
   let middle = Math.floor((leftIdx + rightIdx) / 2);
-  await splitArray(leftIdx, middle, setRandomArray, sortSpeed);
-  await splitArray(middle, rightIdx, setRandomArray, sortSpeed);
+  await splitArray(
+    leftIdx,
+    middle,
+    setRandomArray,
+    sortSpeed,
+    setArrayComparisons,
+    setArrayAccesses
+  );
+  await splitArray(
+    middle,
+    rightIdx,
+    setRandomArray,
+    sortSpeed,
+    setArrayComparisons,
+    setArrayAccesses
+  );
 
-  await mergeArray(leftIdx, middle, rightIdx, setRandomArray, sortSpeed);
+  await mergeArray(
+    leftIdx,
+    middle,
+    rightIdx,
+    setRandomArray,
+    sortSpeed,
+    setArrayComparisons,
+    setArrayAccesses
+  );
 };
 
 const mergeArray = async (
@@ -37,10 +77,13 @@ const mergeArray = async (
   middle,
   rightIdx,
   setRandomArray,
-  sortSpeed
+  sortSpeed,
+  setArrayComparisons,
+  setArrayAccesses
 ) => {
   let i = 0,
     j = 0;
+
   let leftArr = arrayCopy.slice(leftIdx, middle);
   let rightArr = arrayCopy.slice(middle, rightIdx);
   let tempArray = [];
@@ -54,6 +97,8 @@ const mergeArray = async (
 
   while (i < leftArr.length && j < rightArr.length) {
     await asyncTimeout({ timeout: sortSpeed / 3 });
+    comparisons++;
+    accesses += 2;
     if (leftArr[i] <= rightArr[j]) {
       if (bar1) bar1.style.backgroundColor = prevColor;
       if (leftIdx !== leftIdx + i)
@@ -69,16 +114,20 @@ const mergeArray = async (
       tempArray.push(rightArr[j]);
       j++;
     }
+    setArrayComparisons(comparisons);
+    setArrayAccesses(accesses);
   }
   if (bar1) bar1.style.backgroundColor = prevColor;
   if (bar2) bar2.style.backgroundColor = prevColor;
 
   while (i < leftArr.length) {
     tempArray.push(leftArr[i]);
+    setArrayAccesses(++accesses);
     i++;
   }
   while (j < rightArr.length) {
     tempArray.push(rightArr[j]);
+    setArrayAccesses(++accesses);
     j++;
   }
   let newBar;
@@ -88,6 +137,7 @@ const mergeArray = async (
 
   for (let iter = leftIdx, k = 0; iter < rightIdx; iter++, k++) {
     arrayCopy[iter] = tempArray[k];
+    setArrayAccesses(++accesses);
     await asyncTimeout({ timeout: sortSpeed / 3 });
     if (newBar) newBar.style.background = prevColor;
     if (iter !== leftIdx) {

@@ -1,9 +1,8 @@
 const Button = (props) => {
   const taskClick = () => {
     props.task();
-    if (props.setArrayComparisons) {
-      props.setArrayComparisons(0);
-    }
+    if (props.setArrayComparisons) props.setArrayComparisons(0);
+    if (props.setArrayAccesses) props.setArrayAccesses(0);
   };
 
   return (

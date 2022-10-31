@@ -1,8 +1,6 @@
 import asyncTimeout from '../HelperFunctions/asyncTimeout';
 import checkArray from '../HelperFunctions/checkArray';
 
-let comparisons = 0;
-
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -17,13 +15,21 @@ const bogoSort = async ({
   setRandomArray,
   sortSpeed,
   setArrayComparisons,
+  setArrayAccesses,
 }) => {
+  let totalComparisons = 0,
+    totalAccesses = 0;
   let arr = randomArray.concat();
-  while (!(await checkArray(arr))) {
-    setArrayComparisons(++comparisons);
+  let [isSorted, comparisons, accesses] = await checkArray(arr);
+  while (!isSorted) {
+    totalComparisons += comparisons;
+    totalAccesses += accesses;
+    setArrayComparisons(totalComparisons);
+    setArrayAccesses(totalAccesses);
     shuffleArray(arr);
     setRandomArray(arr.concat());
     await asyncTimeout({ timeout: sortSpeed });
+    [isSorted, comparisons, accesses] = await checkArray(arr);
   }
 };
 

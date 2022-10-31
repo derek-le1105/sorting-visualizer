@@ -20,6 +20,7 @@ const Visualizer = () => {
   const [sortSpeed, setSortSpeed] = useState(50);
   const [algorithm, setAlgorithm] = useState('Algorithm');
   const [arrayComparisons, setArrayComparisons] = useState(0);
+  const [arrayAccesses, setArrayAccesses] = useState(0);
   const [isRunning, setRunning] = useState(false);
 
   const generateArray = () => {
@@ -58,6 +59,7 @@ const Visualizer = () => {
             setRandomArray,
             sortSpeed,
             setArrayComparisons,
+            setArrayAccesses,
           });
           break;
 
@@ -67,6 +69,7 @@ const Visualizer = () => {
             setRandomArray,
             sortSpeed,
             setArrayComparisons,
+            setArrayAccesses,
           });
           break;
 
@@ -76,6 +79,7 @@ const Visualizer = () => {
             setRandomArray,
             sortSpeed,
             setArrayComparisons,
+            setArrayAccesses,
           });
           break;
         case 'Quick Sort':
@@ -84,6 +88,7 @@ const Visualizer = () => {
             setRandomArray,
             sortSpeed,
             setArrayComparisons,
+            setArrayAccesses,
           });
           break;
         case 'Bogo Sort':
@@ -92,6 +97,7 @@ const Visualizer = () => {
             setRandomArray,
             sortSpeed,
             setArrayComparisons,
+            setArrayAccesses,
           });
           break;
         default:
@@ -104,7 +110,10 @@ const Visualizer = () => {
   return (
     <>
       <div className="sorting-information">
-        <span>Array Comparisons: {arrayComparisons}</span>
+        <span>
+          Array Comparisons: {arrayComparisons} <b>|</b> Array Accesses:{' '}
+          {arrayAccesses}
+        </span>
       </div>
       <SettingBar
         isRunning={isRunning}
@@ -115,6 +124,7 @@ const Visualizer = () => {
         changeArraySize={changeArraySize}
         changeSortSpeed={changeSortSpeed}
         setArrayComparisons={setArrayComparisons}
+        setArrayAccesses={setArrayAccesses}
       ></SettingBar>
       <div className="bar-container" id="container">
         {randomArray.map((value, idx) => (

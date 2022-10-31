@@ -1,19 +1,21 @@
 import asyncTimeout from '../HelperFunctions/asyncTimeout';
+import checkArray from '../HelperFunctions/checkArray';
 
 const prevColor = '#C9B79C';
 const compareColor = '#574638';
 const iteratingColor = '#B42D43';
-const correctColor = `#899886`;
 const swappingColor = `#CF963A`;
 
 let sortSpd;
-let comparisons = 0;
+let comparisons = 0,
+  accesses = 0;
 
 const quickSort = async ({
   randomArray,
   setRandomArray,
   sortSpeed,
   setArrayComparisons,
+  setArrayAccesses,
 }) => {
   sortSpd = sortSpeed;
   let leftIdx = 0,
@@ -23,8 +25,10 @@ const quickSort = async ({
     leftIdx,
     rightIdx,
     setRandomArray,
-    setArrayComparisons
+    setArrayComparisons,
+    setArrayAccesses
   );
+  await checkArray(randomArray);
 };
 
 const quickSortHelper = async (
@@ -32,7 +36,8 @@ const quickSortHelper = async (
   leftIdx,
   rightIdx,
   setRandomArray,
-  setArrayComparisons
+  setArrayComparisons,
+  setArrayAccesses
 ) => {
   if (leftIdx < rightIdx) {
     let partitionIdx = await partition(
@@ -40,22 +45,24 @@ const quickSortHelper = async (
       leftIdx,
       rightIdx,
       setRandomArray,
-      setArrayComparisons
+      setArrayComparisons,
+      setArrayAccesses
     );
-    console.log(partitionIdx);
     await quickSortHelper(
       randomArray,
       leftIdx,
       partitionIdx - 1,
       setRandomArray,
-      setArrayComparisons
+      setArrayComparisons,
+      setArrayAccesses
     );
     await quickSortHelper(
       randomArray,
       partitionIdx + 1,
       rightIdx,
       setRandomArray,
-      setArrayComparisons
+      setArrayComparisons,
+      setArrayAccesses
     );
   }
 };
@@ -65,7 +72,8 @@ const partition = async (
   leftIdx,
   rightIdx,
   setRandomArray,
-  setArrayComparisons
+  setArrayComparisons,
+  setArrayAccesses
 ) => {
   let pivot = randomArray[rightIdx];
   let i = leftIdx - 1; //becomes second pivot
@@ -87,26 +95,34 @@ const partition = async (
 
     await asyncTimeout({ timeout: sortSpd / 3 });
 
-    setArrayComparisons(comparisons++);
+    comparisons += 1;
+    accesses++;
     if (randomArray[j] <= pivot) {
       i++;
       let temp = randomArray[j];
       randomArray[j] = randomArray[i];
       randomArray[i] = temp;
+      accesses += 3;
       setRandomArray(randomArray.concat());
       await asyncTimeout({ timeout: sortSpd / 3 });
       ithBar.style.backgroundColor = prevColor;
     }
     iteratorBar.style.backgroundColor = prevColor;
+    setArrayComparisons(comparisons);
+    setArrayAccesses(accesses);
   }
 
   let temp = randomArray[i + 1];
   randomArray[i + 1] = randomArray[rightIdx];
   randomArray[rightIdx] = temp;
+  accesses += 3;
   setRandomArray(randomArray.concat());
 
   if (ithBar) ithBar.style.backgroundColor = prevColor;
   pivotBar.style.backgroundColor = prevColor;
+  setArrayComparisons(comparisons);
+  setArrayAccesses(accesses);
+
   return i + 1;
 };
 

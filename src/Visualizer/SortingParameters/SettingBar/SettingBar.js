@@ -15,6 +15,7 @@ const SettingBar = ({
   changeArraySize,
   changeSortSpeed,
   setArrayComparisons,
+  setArrayAccesses,
 }) => {
   return (
     <>
@@ -22,6 +23,7 @@ const SettingBar = ({
         <Button
           task={randomizeClicked}
           setArrayComparisons={setArrayComparisons}
+          setArrayAccesses={setArrayAccesses}
           title="Randomize Array"
         ></Button>
         <Slider
