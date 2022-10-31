@@ -45,7 +45,7 @@ const SettingBar = ({
           id={'speedSlider'}
           onSlide={changeSortSpeed}
           min={0}
-          max={5000}
+          max={100}
           defaultValue={50}
         />
 

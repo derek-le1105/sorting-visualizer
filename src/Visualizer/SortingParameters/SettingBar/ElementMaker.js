@@ -9,6 +9,9 @@ const ElementMaker = (props) => {
           onBlur={props.handleBlur}
           min={5}
           max={100}
+          style={{
+            width: '40px',
+          }}
         />
       ) : (
         <span
