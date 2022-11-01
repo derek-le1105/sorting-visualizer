@@ -81,6 +81,16 @@ const AlgorithmDropDown = ({ algorithm, setAlgorithm }) => {
               Bogo Sort
             </button>
           </li>
+          <li className="menu-item">
+            <button
+              onClick={() => {
+                setAlgorithm('Cocktail Sort');
+                setMenuOpen(false);
+              }}
+            >
+              Cocktail Sort
+            </button>
+          </li>
         </ul>
       )}
     </div>

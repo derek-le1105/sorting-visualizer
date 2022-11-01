@@ -6,6 +6,7 @@ import mergeSort from './SortingAlgorithms/mergeSort';
 import selectionSort from './SortingAlgorithms/selectionSort';
 import quickSort from './SortingAlgorithms/quickSort';
 import bogoSort from './SortingAlgorithms/bogoSort';
+import cocktailSort from './SortingAlgorithms/cocktailSort';
 
 import randomizeArray from './HelperFunctions/randomizeArray';
 import React, { useState } from 'react';
@@ -93,6 +94,15 @@ const Visualizer = () => {
           break;
         case 'Bogo Sort':
           await bogoSort({
+            randomArray,
+            setRandomArray,
+            sortSpeed,
+            setArrayComparisons,
+            setArrayAccesses,
+          });
+          break;
+        case 'Cocktail Sort':
+          await cocktailSort({
             randomArray,
             setRandomArray,
             sortSpeed,
