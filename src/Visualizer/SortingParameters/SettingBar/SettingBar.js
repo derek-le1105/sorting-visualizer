@@ -19,7 +19,7 @@ const SettingBar = ({
 }) => {
   return (
     <>
-      <div className="setting-bar">
+      <div className="setting-bar" style={{ maxWidth: '100%' }}>
         <Button
           task={randomizeClicked}
           setArrayComparisons={setArrayComparisons}

@@ -19,6 +19,7 @@ const Slider = (props) => {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        maxWidth: '210px',
       }}
     >
       <span style={{ color: 'white' }}>{props.text}: </span>
@@ -40,9 +41,6 @@ const Slider = (props) => {
           changeInput={changeInput}
         ></ElementMaker>
       </span>
-      {
-        //<label style={{ color: 'white' }}>{size}</label>
-      }
     </div>
   );
 };

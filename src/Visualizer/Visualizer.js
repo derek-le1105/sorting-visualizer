@@ -7,6 +7,7 @@ import selectionSort from './SortingAlgorithms/selectionSort';
 import quickSort from './SortingAlgorithms/quickSort';
 import bogoSort from './SortingAlgorithms/bogoSort';
 import cocktailSort from './SortingAlgorithms/cocktailSort';
+import insertionSort from './SortingAlgorithms/insertionSort';
 
 import randomizeArray from './HelperFunctions/randomizeArray';
 import React, { useState } from 'react';
@@ -63,7 +64,6 @@ const Visualizer = () => {
             setArrayAccesses,
           });
           break;
-
         case 'Merge Sort':
           await mergeSort({
             randomArray,
@@ -73,7 +73,6 @@ const Visualizer = () => {
             setArrayAccesses,
           });
           break;
-
         case 'Selection Sort':
           await selectionSort({
             randomArray,
@@ -110,6 +109,16 @@ const Visualizer = () => {
             setArrayAccesses,
           });
           break;
+        case 'Insertion Sort':
+          await insertionSort({
+            randomArray,
+            setRandomArray,
+            sortSpeed,
+            setArrayComparisons,
+            setArrayAccesses,
+          });
+          break;
+
         default:
           break;
       }
