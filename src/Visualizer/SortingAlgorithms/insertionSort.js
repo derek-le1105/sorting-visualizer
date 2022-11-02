@@ -25,6 +25,7 @@ const insertionSort = async ({
 
     pivotBar = document.getElementById(`bar-${i}`);
     pivotBar.style.backgroundColor = compareColor;
+    await asyncTimeout({ timeout: sortSpeed / 3 });
 
     setArrayComparisons(comparisons++);
     setArrayAccesses(accesses++);
@@ -38,7 +39,7 @@ const insertionSort = async ({
       j -= 1;
 
       setRandomArray(randomArray.concat());
-      await asyncTimeout({ timeout: sortSpeed / 2 });
+      await asyncTimeout({ timeout: sortSpeed / 3 });
 
       accesses += 2;
       setArrayAccesses(accesses);
@@ -51,7 +52,7 @@ const insertionSort = async ({
     randomArray[j + 1] = key;
     setArrayAccesses(accesses++);
     setRandomArray(randomArray.concat());
-    await asyncTimeout({ timeout: sortSpeed / 2 });
+    await asyncTimeout({ timeout: sortSpeed / 3 });
   }
   pivotBar.style.backgroundColor = prevColor;
 
