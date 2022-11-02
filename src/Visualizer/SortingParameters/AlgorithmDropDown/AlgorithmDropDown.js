@@ -14,7 +14,7 @@ const AlgorithmDropDown = ({ algorithm, setAlgorithm }) => {
     <div className="dropdown" style={{ margin: '15px' }}>
       <button
         onClick={handleMenuOpen}
-        style={{ height: `100%`, padding: `0px 20px` }}
+        style={{ height: `100%`, minWidth: '120px' }}
       >
         <span>{algorithm} </span>
         {
@@ -35,7 +35,7 @@ const AlgorithmDropDown = ({ algorithm, setAlgorithm }) => {
             <button
               onClick={() => {
                 setAlgorithm('Bubble Sort');
-                setMenuOpen(false);
+                setMenuOpen(!menuOpen);
               }}
             >
               Bubble Sort
@@ -45,7 +45,7 @@ const AlgorithmDropDown = ({ algorithm, setAlgorithm }) => {
             <button
               onClick={() => {
                 setAlgorithm('Merge Sort');
-                setMenuOpen(false);
+                setMenuOpen(!menuOpen);
               }}
             >
               Merge Sort
@@ -55,7 +55,7 @@ const AlgorithmDropDown = ({ algorithm, setAlgorithm }) => {
             <button
               onClick={() => {
                 setAlgorithm('Selection Sort');
-                setMenuOpen(false);
+                setMenuOpen(!menuOpen);
               }}
             >
               Selection Sort
@@ -65,7 +65,7 @@ const AlgorithmDropDown = ({ algorithm, setAlgorithm }) => {
             <button
               onClick={() => {
                 setAlgorithm('Quick Sort');
-                setMenuOpen(false);
+                setMenuOpen(!menuOpen);
               }}
             >
               Quick Sort
@@ -75,7 +75,7 @@ const AlgorithmDropDown = ({ algorithm, setAlgorithm }) => {
             <button
               onClick={() => {
                 setAlgorithm('Bogo Sort');
-                setMenuOpen(false);
+                setMenuOpen(!menuOpen);
               }}
             >
               Bogo Sort
@@ -85,10 +85,20 @@ const AlgorithmDropDown = ({ algorithm, setAlgorithm }) => {
             <button
               onClick={() => {
                 setAlgorithm('Cocktail Sort');
-                setMenuOpen(false);
+                setMenuOpen(!menuOpen);
               }}
             >
               Cocktail Sort
+            </button>
+          </li>
+          <li className="menu-item">
+            <button
+              onClick={() => {
+                setAlgorithm('Insertion Sort');
+                setMenuOpen(!menuOpen);
+              }}
+            >
+              Insertion Sort
             </button>
           </li>
         </ul>
