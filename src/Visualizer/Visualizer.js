@@ -1,5 +1,6 @@
 import './Visualizer.css';
 import SettingBar from './SortingParameters/SettingBar/SettingBar.js';
+import asyncTimeout from './HelperFunctions/asyncTimeout';
 
 import bubbleSort from './SortingAlgorithms/bubbleSort.js';
 import mergeSort from './SortingAlgorithms/mergeSort';
@@ -18,7 +19,6 @@ const Visualizer = () => {
   const [randomArray, setRandomArray] = useState(
     randomizeArray(defaultArraySize)
   );
-
   const [sortSpeed, setSortSpeed] = useState(50);
   const [algorithm, setAlgorithm] = useState('Algorithm');
   const [arrayComparisons, setArrayComparisons] = useState(0);
@@ -49,6 +49,7 @@ const Visualizer = () => {
   };
 
   const startSort = async () => {
+    let animationList = [];
     if (!isRunning) {
       setRunning(true);
       switch (algorithm) {
@@ -56,14 +57,12 @@ const Visualizer = () => {
           alert('Please select a sorting algorithm in the dropdown below');
           break;
         case 'Bubble Sort':
-          await bubbleSort({
+          bubbleSort({
             randomArray,
-            setRandomArray,
-            sortSpeed,
-            setArrayComparisons,
-            setArrayAccesses,
+            animationList,
           });
           break;
+        /*
         case 'Merge Sort':
           await mergeSort({
             randomArray,
@@ -118,11 +117,21 @@ const Visualizer = () => {
             setArrayAccesses,
           });
           break;
-
+*/
         default:
           break;
       }
       setRunning(false);
+    }
+
+    for (const pair of animationList) {
+      [randomArray[pair[0]], randomArray[pair[1]]] = [
+        randomArray[pair[1]],
+        randomArray[pair[0]],
+      ];
+
+      setRandomArray(randomArray.concat());
+      await asyncTimeout({ timeout: sortSpeed });
     }
   };
 
@@ -154,7 +163,7 @@ const Visualizer = () => {
             style={{
               height: `${value}px`,
               width: `${100 / randomArray.length}%`,
-              backgroundColor: '#C9B79C',
+              backgroundColor: '#A88C61',
             }}
           ></div>
         ))}

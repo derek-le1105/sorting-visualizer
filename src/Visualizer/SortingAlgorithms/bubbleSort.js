@@ -5,6 +5,7 @@ const prevColor = '#C9B79C';
 const compareColor = '#574638';
 const compareColor2 = '#B42D43';
 
+/*
 const bubbleSort = async ({
   randomArray,
   setRandomArray,
@@ -46,6 +47,20 @@ const bubbleSort = async ({
     correctBar.style.backgroundColor = prevColor;
   }
   await checkArray(randomArray);
+};*/
+
+const bubbleSort = ({ randomArray, animationList }) => {
+  let arr = randomArray.concat();
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length - i - 1; j++) {
+      if (arr[j] > arr[j + 1]) {
+        animationList.push([j, j + 1, -1]);
+        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+      } else {
+        animationList.push([j, j, -1]);
+      }
+    }
+  }
 };
 
 export default bubbleSort;
